@@ -6,11 +6,12 @@ export interface StyleOption {
   category: StyleCategory;
   promptSuffix: string;
   thumbnail: string;
-  desc?: string; // 説明文フィールドを型に追加
+  desc?: string;
 }
 
 export type StyleCategory = 
   | '描き方'
+  | '古典 migratory技法'
   | '古典的技法' 
   | '近代美術' 
   | '装飾美術・工芸' 
@@ -24,27 +25,9 @@ export type StyleCategory =
   | '現代アート & ポップカルチャー'
   | '配色・色彩';
 
-export interface PromptState {
-  subject: string;
-  styleIds: string[];
-  lighting: string;
-  angle: string;
-  shotSize: string;
-  composition: string;
-  stylize: number;
-  chaos: number;
-  weird: number;
-  personalize: string;
-  sref: string;
-  sw: number; 
-  no: string;
-  version: string;
-  raw: boolean;
-}
-
 export const CATEGORIES: StyleCategory[] = [
   '描き方',
-  '古典 migratory技法' as any === '古典 migratory技法' as any ? '古典的技法' : '古典的技法', 
+  '古典的技法', 
   '近代美術', 
   '装飾美術・工芸', 
   '写真・映像技法', 
@@ -58,7 +41,6 @@ export const CATEGORIES: StyleCategory[] = [
   '配色・色彩'
 ];
 
-// 配色・色彩の詳細説明マッピング
 export const COLOR_DESCRIPTIONS: Record<string, string> = {
   'vivid-color': '高彩度で大胆、強烈な色彩パレット',
   'neon-color': '蛍光ピンク、黄色、オレンジが発光する電脳パレット',
@@ -133,3 +115,21 @@ export const VERSION_OPTIONS = [
   { label: 'MJ 7 (Latest Photo/Art)', value: '7' },
   { label: 'MJ 6.1 (Stable Photo/Art)', value: '6.1' }
 ];
+
+export interface PromptState {
+  subject: string;
+  styleIds: string[];
+  lighting: string;
+  angle: string;
+  shotSize: string;
+  composition: string;
+  stylize: number;
+  chaos: number;
+  weird: number;
+  personalize: string;
+  sref: string;
+  sw: number; 
+  no: string;
+  version: string;
+  raw: boolean;
+}

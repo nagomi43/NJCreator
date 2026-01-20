@@ -66,6 +66,8 @@ const App: React.FC = () => {
     try {
       const enhanced = await enhanceField('Subject', form.subject, '');
       setForm(prev => ({ ...prev, subject: enhanced }));
+    } catch (e) {
+      console.error(e);
     } finally {
       setEnhancingFields(prev => ({ ...prev, subject: false }));
     }
@@ -77,6 +79,8 @@ const App: React.FC = () => {
     try {
       const result = await enhancePromptWithGemini(form);
       setGeneratedPrompt(result);
+    } catch (e) {
+      console.error(e);
     } finally {
       setLoading(false);
     }
@@ -307,8 +311,8 @@ const App: React.FC = () => {
             </div>
             <div className="flex flex-wrap gap-x-2 gap-y-2 shrink-0 max-w-full">
               <button onClick={() => setActiveCategory('すべて')} className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border ${activeCategory === 'すべて' ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-white text-zinc-500 border-zinc-200 shadow-sm hover:border-zinc-400'}`}>すべて</button>
-              {CATEGORIES.filter(cat => cat !== '配色・色彩').map(cat => (
-                <button key={cat} onClick={() => setActiveCategory(cat)} className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border ${activeCategory === cat ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-white text-zinc-500 border-zinc-200 shadow-sm hover:border-zinc-400'}`}>{cat}</button>
+              {CATEGORIES.map(cat => (
+                <button key={String(cat)} onClick={() => setActiveCategory(cat)} className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border ${activeCategory === cat ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-white text-zinc-500 border-zinc-200 shadow-sm hover:border-zinc-400'}`}>{String(cat)}</button>
               ))}
             </div>
           </div>
@@ -363,7 +367,6 @@ const App: React.FC = () => {
           cursor: pointer; border: 2px solid #1a1614;
         }
 
-        /* ツールチップの配置を真下中央に固定 */
         .tooltip-white {
           visibility: hidden; opacity: 0;
           position: absolute;
