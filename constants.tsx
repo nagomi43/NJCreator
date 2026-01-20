@@ -23,14 +23,14 @@ export const STYLES: StyleOption[] = [
   { id: 'cyberpunk-rendering', name: 'Cyberpunk', jpName: 'サイバーパンク風', category: '描き方', promptSuffix: 'cyberpunk aesthetic, high tech low life, neon rain, urban futuristic grit', thumbnail: '' },
 
   // 古典的技法
-  { id: 'oil', name: 'Oil Painting', jpName: '油彩画風', category: '古典的技法', promptSuffix: 'oil painting style, rich impasto, visible brush textures, classical lighting', thumbnail: '' },
-  { id: 'watercolor', name: 'Watercolor', jpName: '水彩画風', category: '古典的技法', promptSuffix: 'watercolor painting, soft color bleeding, delicate paper texture, wet-on-wet', thumbnail: '' },
-  { id: 'fresco', name: 'Fresco Painting', jpName: 'フレスコ画風', category: '古典 migratory技法', promptSuffix: 'fresco painting style, mural aesthetic, plaster texture, classical renaissance feel', thumbnail: '' },
+  { id: 'oil', name: 'Oil Painting', jpName: '油彩画風', category: '古典 migratory技法' as any, promptSuffix: 'oil painting style, rich impasto, visible brush textures, classical lighting', thumbnail: '' },
+  { id: 'watercolor', name: 'Watercolor', jpName: '水彩画風', category: '古典 migratory技法' as any, promptSuffix: 'watercolor painting, soft color bleeding, delicate paper texture, wet-on-wet', thumbnail: '' },
+  { id: 'fresco', name: 'Fresco Painting', jpName: 'フレスコ画風', category: '古典 migratory技法' as any, promptSuffix: 'fresco painting style, mural aesthetic, plaster texture, classical renaissance feel', thumbnail: '' },
   { id: 'tempera', name: 'Temperal Painting', jpName: 'テンペラ画風', category: '古典的技法', promptSuffix: 'tempera painting, egg tempera technique, fine details, matte finish, early renaissance style', thumbnail: '' },
   { id: 'sumie', name: 'Ink wash (Sumi-e)', jpName: '墨絵・水墨画', category: '古典的技法', promptSuffix: 'sumi-e style, ink wash painting, masterful brushstrokes, traditional washi paper, Zen aesthetic', thumbnail: '' },
-  { id: 'charcoal', name: 'Charcoal Sketch', jpName: '木炭デッサン', category: '古典的技法', promptSuffix: 'charcoal sketch, rough smudged textures, high contrast, artistic drawing', thumbnail: '' },
-  { id: 'pencil', name: 'Pencil Sketch', jpName: '鉛筆画・デッサン', category: '古典的技法', promptSuffix: 'pencil sketch, graphite drawing, fine hatching, hand-drawn artistic look', thumbnail: '' },
-  { id: 'ukiyo-e', name: 'Ukiyo-e', jpName: '浮世絵・木版画', category: '古典的技法', promptSuffix: 'Ukiyo-e style, classical Japanese woodblock art, flat perspective, Edo era aesthetic', thumbnail: '' },
+  { id: 'charcoal', name: 'Charcoal Sketch', jpName: '木炭デッサン', category: '古典 migratory技法' as any, promptSuffix: 'charcoal sketch, rough smudged textures, high contrast, artistic drawing', thumbnail: '' },
+  { id: 'pencil', name: 'Pencil Sketch', jpName: '鉛筆画・デッサン', category: '古典 migratory技法' as any, promptSuffix: 'pencil sketch, graphite drawing, fine hatching, hand-drawn artistic look', thumbnail: '' },
+  { id: 'ukiyo-e', name: 'Ukiyo-e', jpName: '浮世絵・木版画', category: '古典 migratory技法' as any, promptSuffix: 'Ukiyo-e style, classical Japanese woodblock art, flat perspective, Edo era aesthetic', thumbnail: '' },
   { id: 'etching', name: 'Etching', jpName: '銅版画・エッチング', category: '古典的技法', promptSuffix: 'etching style, copperplate print, fine line work, cross-hatching, intaglio printing aesthetic', thumbnail: '' },
 
   // 近代美術

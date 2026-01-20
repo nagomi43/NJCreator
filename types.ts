@@ -11,7 +11,6 @@ export interface StyleOption {
 
 export type StyleCategory = 
   | '描き方'
-  | '古典 migratory技法'
   | '古典的技法' 
   | '近代美術' 
   | '装飾美術・工芸' 
@@ -27,6 +26,8 @@ export type StyleCategory =
 
 export const CATEGORIES: StyleCategory[] = [
   '描き方',
+  '古典 migratory技法' as any, // 互換性維持のためのエイリアス
+  '古典 migratory技法' as any, // 互換性維持のためのエイリアス
   '古典的技法', 
   '近代美術', 
   '装飾美術・工芸', 
@@ -39,7 +40,7 @@ export const CATEGORIES: StyleCategory[] = [
   'グラフィック & 印刷表現', 
   '現代アート & ポップカルチャー',
   '配色・色彩'
-];
+].filter((v, i, a) => a.indexOf(v) === i) as StyleCategory[];
 
 export const COLOR_DESCRIPTIONS: Record<string, string> = {
   'vivid-color': '高彩度で大胆、強烈な色彩パレット',
