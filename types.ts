@@ -11,6 +11,7 @@ export interface StyleOption {
 
 export type StyleCategory = 
   | '描き方'
+  | '古典 migratory技法'
   | '古典的技法' 
   | '近代美術' 
   | '装飾美術・工芸' 
@@ -21,13 +22,12 @@ export type StyleCategory =
   | '未来的 & サイバー系'
   | 'ユニーク系'
   | 'グラフィック & 印刷表現' 
-  | '現代アート & ポップカルチャー'
-  | '配色・色彩';
+  | '現代アート & ポップカルチャー';
 
 export const CATEGORIES: StyleCategory[] = [
   '描き方',
-  '古典 migratory技法' as any, // 互換性維持のためのエイリアス
-  '古典 migratory技法' as any, // 互換性維持のためのエイリアス
+  '古典 migratory技法',
+  '古典 migratory技法', // 重複削除は下のfilterで行う
   '古典的技法', 
   '近代美術', 
   '装飾美術・工芸', 
@@ -38,24 +38,8 @@ export const CATEGORIES: StyleCategory[] = [
   '未来的 & サイバー系', 
   'ユニーク系', 
   'グラフィック & 印刷表現', 
-  '現代アート & ポップカルチャー',
-  '配色・色彩'
+  '現代アート & ポップカルチャー'
 ].filter((v, i, a) => a.indexOf(v) === i) as StyleCategory[];
-
-export const COLOR_DESCRIPTIONS: Record<string, string> = {
-  'vivid-color': '高彩度で大胆、強烈な色彩パレット',
-  'neon-color': '蛍光ピンク、黄色、オレンジが発光する電脳パレット',
-  'colorful': '多色使いで明るく多様な色合い',
-  'pastel-colors': '柔らかく淡い、優しい低彩度パレット',
-  'earth-tones': '茶系、緑、タンなどの自然で有機的な色合い',
-  'metallic-colors': '金、銀、クロームなどの光沢と反射のある質感',
-  'monochrome': '白黒、グレースケール、単一トーンの表現',
-  'chromatic-color': '色の三要素を強調した鮮やかな有彩色',
-  'intermediate-colors': '控えめで落ち着いた、調和の取れた中間トーン',
-  'achromatic-colors': '黒、白、灰色のみで構成された中立的なパレット',
-  'transparent': '透明、半透明、ガラスのような層状の質感',
-  'iridescent': '真珠のような光沢、見る角度で変わる虹色の輝き'
-};
 
 export const LIGHTING_OPTIONS = [
   { label: 'Choice（選択）', value: '', desc: '自動設定' },

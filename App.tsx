@@ -8,7 +8,6 @@ import {
   SHOT_SIZE_OPTIONS,
   COMPOSITION_OPTIONS,
   VERSION_OPTIONS,
-  COLOR_DESCRIPTIONS,
   PromptState,
   StyleCategory
 } from './types';
@@ -40,14 +39,9 @@ const App: React.FC = () => {
   });
 
   const filteredStyles = useMemo(() => {
-    const baseStyles = STYLES.filter(s => s.category !== '配色・色彩');
-    if (activeCategory === 'すべて') return baseStyles;
-    return baseStyles.filter(s => String(s.category) === String(activeCategory));
+    if (activeCategory === 'すべて') return STYLES;
+    return STYLES.filter(s => String(s.category) === String(activeCategory));
   }, [activeCategory]);
-
-  const colorCategoryStyles = useMemo(() => {
-    return STYLES.filter(s => s.category === '配色・色彩');
-  }, []);
 
   const toggleStyle = (id: string) => {
     setForm(prev => {
@@ -195,28 +189,8 @@ const App: React.FC = () => {
               <CustomSelect label="構図" options={COMPOSITION_OPTIONS} value={form.composition} onChange={(v: string) => setForm({ ...form, composition: v })} />
             </div>
 
-            <div className="grid grid-cols-3 gap-2 lg:gap-3 dropdown-grid">
+            <div className="grid grid-cols-2 gap-2 lg:gap-3 dropdown-grid">
               <CustomSelect label="ライティング" options={LIGHTING_OPTIONS} value={form.lighting} onChange={(v: string) => setForm({ ...form, lighting: v })} />
-              <CustomSelect 
-                label="配色・色彩" 
-                options={[ 
-                  { label: 'Choice（選択）', value: '', desc: '自動設定' }, 
-                  ...colorCategoryStyles.map(s => ({ 
-                    label: s.jpName, 
-                    value: s.id, 
-                    desc: COLOR_DESCRIPTIONS[s.id] || '' 
-                  })) 
-                ]} 
-                value={form.styleIds.find(id => colorCategoryStyles.some(c => c.id === id)) || ''} 
-                onChange={(v: string) => {
-                  const otherStyles = form.styleIds.filter(id => !colorCategoryStyles.some(c => c.id === id));
-                  if (v === '') {
-                    setForm({ ...form, styleIds: otherStyles });
-                  } else {
-                    setForm({ ...form, styleIds: [...otherStyles, v].slice(0, 5) });
-                  }
-                }} 
-              />
               <CustomSelect label="Engine" options={VERSION_OPTIONS} value={form.version} onChange={(v: string) => setForm({ ...form, version: v })} />
             </div>
 
@@ -246,18 +220,6 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 min-h-[24px]">
-              {form.styleIds.filter(id => colorCategoryStyles.some(c => c.id === id)).map(id => {
-                const s = STYLES.find(item => item.id === id);
-                return (
-                  <div key={id} className="flex items-center gap-2 px-3 py-1 bg-blue-600/20 text-blue-400 rounded-lg text-[10px] font-black border border-blue-600/30">
-                    <span>{s?.jpName}</span>
-                    <button onClick={() => toggleStyle(id)} className="hover:text-white"><i className="fa-solid fa-xmark"></i></button>
-                  </div>
-                );
-              })}
-            </div>
-
             <div className="pt-6 border-t border-white/5 space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -270,14 +232,19 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <a href="https://www.stylesafari.xyz/" target="_blank" rel="noopener noreferrer" className="flex-1 group flex items-center justify-center gap-3 bg-zinc-800/50 hover:bg-zinc-700 px-4 py-4 rounded-2xl transition-all border border-zinc-700/50 text-white font-bold text-[10px] uppercase tracking-wider">
-                  StyleSafari <i className="fa-solid fa-arrow-up-right-from-square text-[9px] text-zinc-500"></i>
-                </a>
+              <div className="space-y-3">
+                <div className="flex gap-2">
+                  <a href="https://www.stylesafari.xyz/" target="_blank" rel="noopener noreferrer" className="flex-1 group flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-zinc-700 px-3 py-4 rounded-2xl transition-all border border-zinc-700/50 text-white font-bold text-[9px] uppercase tracking-wider">
+                    StyleSafari <i className="fa-solid fa-arrow-up-right-from-square text-[8px] text-zinc-500"></i>
+                  </a>
+                  <a href="https://nyamlog.com/srefdb/category/illustration/" target="_blank" rel="noopener noreferrer" className="flex-1 group flex items-center justify-center gap-2 bg-zinc-800/50 hover:bg-zinc-700 px-3 py-4 rounded-2xl transition-all border border-zinc-700/50 text-white font-bold text-[9px] uppercase tracking-wider">
+                    SREF DB <i className="fa-solid fa-database text-[8px] text-zinc-500"></i>
+                  </a>
+                </div>
                 <button
                   onClick={handleGenerate}
                   disabled={loading || !form.subject}
-                  className={`flex-[2] py-4 rounded-2xl font-black text-[12px] lg:text-[13px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 ${
+                  className={`w-full py-4 rounded-2xl font-black text-[12px] lg:text-[13px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 ${
                     loading ? 'bg-zinc-800 text-zinc-600 cursor-wait' : 'bg-white hover:bg-blue-600 hover:text-white text-black active:scale-[0.98]'
                   }`}
                 >
